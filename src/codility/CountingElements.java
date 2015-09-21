@@ -66,20 +66,24 @@ public class CountingElements {
 
     public int[] MaxCounters(int N, int[] A) {
 
-        int max = 0;
+        int max = 0, set = 0;
         int[] Arr = new int[N];
 
         for (int i = 0; i < A.length; i++) {
             if (A[i] > N) {
-                for (int j = 0; j < N; j++) {
-                    Arr[j] = max;
-                }
+                   set = max;
             } else {
+                if(Arr[i-1] < set && set != 0)
+                    Arr[i-1] =  set;
                 Arr[A[i] - 1] += 1;
                 if (Arr[A[i] - 1] > max) {
                     max = Arr[A[i] - 1];
                 }
             }
+        }
+        for(int i = 0 ; i < Arr.length ;i++){
+            if(Arr[i] < set)
+                Arr[i] = set;
         }
         return Arr;
     }
